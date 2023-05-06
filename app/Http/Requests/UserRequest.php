@@ -7,33 +7,44 @@ use Illuminate\Validation\Rules\Password;
 
 class UserRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
-    public function rules()
+    public function rules(): array
     {
         return [
-            'email' => [
-                'required', 'unique:users,email,' . optional($this->user)->id,
+            'name' => [
+                'required',
+                'min:3',
+                'max:255'
             ],
             'username' => [
-                'required', 'unique:users,username,' . optional($this->user)->id,
+                'required',
             ],
-            'name' => ['required'],
-            'password' => (empty($this->user->password)) ? ['required', Password::defaults()] : '',
-            'address' => ['required'],
+            'email' => [
+                'required',
+                'email',
+                'max:255',
+                'unique:users'
+            ],
+            'password' => [
+                'required',
+                'min:6',
+                'max:255'
+            ],
         ];
+        /*         return [
+        'email' => [
+        'required', 'unique:users,email,' . optional($this->user)->id,
+        ],
+        'username' => [
+        'required', 'unique:users,username,' . optional($this->user)->id,
+        ],
+        'name' => ['required'],
+        'password' => (empty($this->user->password)) ? ['required', Password::defaults()] : '',
+        'address' => ['required'],
+        ]; */
     }
 }

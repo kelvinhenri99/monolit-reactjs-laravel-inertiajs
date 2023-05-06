@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use App\Http\Resources\UserResource;
+use App\Http\Requests\UserRequest;
 
 class RegisterController extends Controller
 {
@@ -16,19 +18,15 @@ class RegisterController extends Controller
         return inertia('Auth/Register');
     }
 
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        $validated = $request->validate([
-            'name' => ['required'],
-            'username' => ['required'],
-            'email' => ['required', 'unique:users'],
-            'password' => ['required'],
-        ]);
+        $data = $request->validated();
+        $data['password'] = bcrypt($request->password);
 
-        if ($validated) {
-            $newUser = User::create($validated);
+        if ($data) {
+            $user = User::create($data);
 
-            Auth::login($newUser);
+            Auth::login($user);
 
             return redirect('/dashboard')->with([
                 'type' => 'success',
