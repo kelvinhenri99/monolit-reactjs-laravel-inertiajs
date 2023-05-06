@@ -1,5 +1,5 @@
 import React from 'react'
-// import PropTypes from 'prop-types'
+
 import { useForm } from '@inertiajs/inertia-react'
 import styled from '@emotion/styled'
 import Auth from '../../Layouts/Auth'
@@ -68,8 +68,6 @@ export default function Login({ errors }) {
 	)
 }
 
-// Login.PropTypes = {
-// 	errors: PropTypes.arrayOf(PropTypes.any).isRequired,
-// }
+
 
 Login.layout = (page) => <Auth children={page} title={'Login'} />
