@@ -11,23 +11,25 @@ use Illuminate\Validation\ValidationException;
 
 class RegisterController extends Controller
 {
-    public function create() {
+    public function create()
+    {
         return inertia('Auth/Register');
     }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $validated = $request->validate([
             'name' => ['required'],
             'username' => ['required'],
-            'email' => ['required','unique:users'],
+            'email' => ['required', 'unique:users'],
             'password' => ['required'],
         ]);
 
-        if($validated) {
+        if ($validated) {
             $newUser = User::create($validated);
-            
+
             Auth::login($newUser);
-    
+
             return redirect('/dashboard')->with([
                 'type' => 'success',
                 'message' => 'You are logged in.'
