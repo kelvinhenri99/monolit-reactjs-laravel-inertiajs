@@ -1,7 +1,10 @@
-import { Link, useForm } from '@inertiajs/inertia-react'
 import React from 'react'
+import PropTypes from 'prop-types'
+
+import { Link, useForm } from '@inertiajs/inertia-react'
 import styled from '@emotion/styled'
 import Auth from '../../Layouts/Auth'
+import routes from '../../routes'
 
 const Container = styled.div`
   display: flex;
@@ -68,7 +71,7 @@ const SignupLink = styled.p`
   text-align: center;
 `
 
-export default function Register ({ errors })  {
+const Register = ({ errors }) => {
 	const { data, setData, post } = useForm({
 		name: '',
 		username: '',
@@ -80,7 +83,7 @@ export default function Register ({ errors })  {
 
 	const submitHandler = (e) => {
 		e.preventDefault()
-		post(route('register'), data)
+		post(routes.register, data)
 	}
 
 	return (
@@ -96,8 +99,8 @@ export default function Register ({ errors })  {
 							type="text"
 							placeholder="Name"
 							aria-label="Name"
+							error={errors && errors.name}
 						/>
-						{errors && <div className="text-danger mt-1">{errors.name}</div>}
 						<Input
 							value={data.username}
 							onChange={changeHandler}
@@ -106,8 +109,8 @@ export default function Register ({ errors })  {
 							type="text"
 							placeholder="Username"
 							aria-label="Username"
+							error={errors && errors.username}
 						/>
-						{errors && <div className="text-danger mt-1">{errors.username}</div>}
 						<Input
 							value={data.email}
 							onChange={changeHandler}
@@ -116,8 +119,8 @@ export default function Register ({ errors })  {
 							type="email"
 							placeholder="Email"
 							aria-label="Email"
+							error={errors && errors.email}
 						/>
-						{errors && <div className="text-danger mt-1">{errors.email}</div>}
 						<Input
 							value={data.password}
 							onChange={changeHandler}
@@ -126,12 +129,12 @@ export default function Register ({ errors })  {
 							type="password"
 							placeholder="Password"
 							aria-label="Password"
+							error={errors && errors.password}
 						/>
-						{errors && <div className="text-danger mt-1">{errors.password}</div>}
-						<SubmitButton type="submit">Register</SubmitButton>
+						<SubmitButton>Register</SubmitButton>
 					</Form>
 					<SignupLink>
-            Already have an account? <Link href={route('login')}>Login</Link>
+                Already have an account? <Link href={routes.login}>Login</Link>
 					</SignupLink>
 				</CardBody>
 			</Card>
@@ -139,7 +142,15 @@ export default function Register ({ errors })  {
 	)
 }
 
-Register.layout = (page) => <Auth children={page} title={'Register'} />
+const RegisterPageWithAuth = () => (
+	<Auth title={'Register'}>
+		<Register />
+	</Auth>
+)
 
+Register.propTypes = {
+	errors: PropTypes.object,
+}
 
+export default RegisterPageWithAuth
 

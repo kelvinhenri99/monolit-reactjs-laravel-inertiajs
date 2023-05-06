@@ -8,7 +8,7 @@ mix.js('resources/js/app.js', 'public/js')
 			new BrowserSyncPlugin({
 				proxy: 'http://localhost:8000',
 				open: false,
-				notify: false,
+				notify: true,
 				files: [
 					'**/*.php',
 					'resources/views/**/*.php',
