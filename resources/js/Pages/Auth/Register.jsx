@@ -19,11 +19,6 @@ const Card = styled.div`
   max-width: 24rem;
 `
 
-const CardHeader = styled.div`
-  padding: 1.5rem;
-  text-align: center;
-`
-
 const CardBody = styled.div`
   padding: 1.5rem;
 `
@@ -91,7 +86,6 @@ export default function Register ({ errors })  {
 	return (
 		<Container>
 			<Card>
-				<CardHeader></CardHeader>
 				<CardBody>
 					<Form onSubmit={submitHandler}>
 						<Input

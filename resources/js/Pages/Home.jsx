@@ -13,4 +13,5 @@ export default function Home() {
 	)
 }
 
+
 Home.layout = (page) => <Navbar children={page} title={'Home'} />
