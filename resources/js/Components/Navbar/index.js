@@ -1,6 +1,8 @@
 import { Link } from '@inertiajs/inertia-react'
 import React from 'react'
 
+import routes from '../../routes'
+
 export default function Navbar() {
 	return (
 		<nav className="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
@@ -22,24 +24,24 @@ export default function Navbar() {
 				<div className="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul className="navbar-nav me-auto mb-2 mb-lg-0">
 						<li className="nav-item">
-							<Link className="nav-link" href={route('home')}>
+							<Link className="nav-link" href={routes.home}>
                 Home
 							</Link>
 						</li>
 						<li className="nav-item">
-							<Link className="nav-link" href={route('dashboard')}>
+							<Link className="nav-link" href={routes.dashboard}>
                 Dashboard
 							</Link>
 						</li>
 					</ul>
 					<ul className="navbar-nav mb-2 mb-lg-0">
 						<li className="nav-item">
-							<Link className="nav-link" href={route('login')}>
+							<Link className="nav-link" href={routes.login}>
                 Login
 							</Link>
 						</li>
 						<li className="nav-item">
-							<Link className="nav-link" href={route('register')}>
+							<Link className="nav-link" href={routes.register}>
                 Register
 							</Link>
 						</li>
