@@ -1,14 +1,24 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import Base from '../Layouts/Base'
 
-export default function Dashboard() {
+export default function Dashboard({ children }) {
 	return (
 		<>
 			<div>
-				<h1>Timeline</h1>
+				<Base title={'Dashboard'}>
+					{children}
+				</Base>
 			</div>
 		</>
 	)
 }
 
-Dashboard.layout = (page) => <Base children={page} title={'Dashboard'} />
+Dashboard.propTypes = {
+	children: PropTypes.node.isRequired,
+}
+
+
+
+
+
