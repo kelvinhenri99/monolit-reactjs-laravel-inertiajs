@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreUpdateUser;
 use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest;
 use App\Models\User;
 
 class UserController extends Controller
@@ -16,16 +16,6 @@ class UserController extends Controller
         return UserResource::collection($users);
     }
 
-    public function store(StoreUpdateUser $request)
-    {
-        $data = $request->validated();
-        $data['password'] = bcrypt($request->password);
-
-        $user = User::create($data);
-
-        return new UserResource($user);
-    }
-
     public function show($id)
     {
         $user = User::findOrFail($id);
@@ -33,7 +23,7 @@ class UserController extends Controller
         return new UserResource($user);
     }
 
-    public function update(StoreUpdateUser $request, $id)
+    public function update(UserRequest $request, $id)
     {
         $user = User::findOrFail($id);
 
